@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScratchCards", "ScratchCards\ScratchCards.csproj", "{5892B8EA-DA77-4223-886D-31488F9D20E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5892B8EA-DA77-4223-886D-31488F9D20E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5892B8EA-DA77-4223-886D-31488F9D20E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5892B8EA-DA77-4223-886D-31488F9D20E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5892B8EA-DA77-4223-886D-31488F9D20E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04F04A9E-8B74-402A-A2C1-87D4780C211F}
+	EndGlobalSection
+EndGlobal
