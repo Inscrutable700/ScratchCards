@@ -15,7 +15,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace ScratchCards
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -34,6 +34,8 @@ namespace ScratchCards
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            this.InitDependencies(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
