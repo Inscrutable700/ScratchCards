@@ -11,9 +11,9 @@ namespace ScratchCards.Controllers
 {
     public class GameController : Controller
     {
-        private readonly ISignRepository signRepository;
+        private readonly IGameManager signRepository;
 
-        public GameController(ISignRepository signRepository)
+        public GameController(IGameManager signRepository)
         {
             this.signRepository = signRepository;
         }

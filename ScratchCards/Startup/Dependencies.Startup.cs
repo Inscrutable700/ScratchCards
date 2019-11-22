@@ -13,7 +13,7 @@ namespace ScratchCards
     {
         private void InitDependencies(IServiceCollection services)
         {
-            services.AddTransient<ISignRepository, SignRepository>();
+            services.AddTransient<IGameManager, SignRepository>();
         }
     }
 }

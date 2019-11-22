@@ -1,4 +1,5 @@
-﻿using ScratchCards.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using ScratchCards.Data;
 using ScratchCards.Interfaces;
 using ScratchCards.Interfaces.Repository;
 using ScratchCards.Models;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ScratchCards.Repository
 {
-    public class SignRepository : ISignRepository
+    public class SignRepository : IGameManager
     {
         private ApplicationDbContext context;
 
@@ -18,6 +19,7 @@ namespace ScratchCards.Repository
             this.context = context;
         }
 
+        [Route(""), HttpGet]
         public Sign[] GetSigns()
         {
             return this.context.Signs.ToArray();
