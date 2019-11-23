@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ScratchCards.Interfaces.Repository;
-using ScratchCards.Models;
-using ScratchCards.Models.Api.Sign;
+﻿using Microsoft.AspNetCore.Mvc;
+using ScratchCards.Interfaces.Manager;
+using ScratchCards.Models.Api.Game;
 
 namespace ScratchCards.Controllers.Api
 {
@@ -14,25 +8,21 @@ namespace ScratchCards.Controllers.Api
     [ApiController]
     public class GameApiController : ControllerBase
     {
-        private readonly IGameManager signRepository;
+        private readonly IGameManager gameManager;
 
-        public GameApiController(IGameManager signRepository)
+        public GameApiController(IGameManager gameManager)
         {
-            this.signRepository = signRepository;
+            this.gameManager = gameManager;
         }
 
-        public GetSignsResponse GetSigns()
+        [HttpPost, Route("")]
+        public GameSpinResponse Spin()
         {
-            Sign[] signs = this.signRepository.GetSigns();
+            int[] signIds = this.gameManager.Spin();
 
-            GetSignsResponse response = new GetSignsResponse
+            GameSpinResponse response = new GameSpinResponse
             {
-                Signs = signs.Select(s => new GetSignsResponse.Sign
-                {
-                    Id = s.Id,
-                    ImageUrl = s.ImageUrl,
-                    Name = s.Name
-                }).ToArray()
+                SignIds = signIds
             };
 
             return response;

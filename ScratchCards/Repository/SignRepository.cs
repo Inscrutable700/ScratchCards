@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ScratchCards.Repository
 {
-    public class SignRepository : IGameManager
+    public class SignRepository : ISignRepository
     {
         private ApplicationDbContext context;
 

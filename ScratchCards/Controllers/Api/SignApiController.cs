@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ScratchCards.Interfaces.Manager;
 using ScratchCards.Interfaces.Repository;
 using ScratchCards.Models;
 using ScratchCards.Models.Api.Sign;
@@ -14,16 +15,16 @@ namespace ScratchCards.Controllers.Api
     [ApiController]
     public class SignApiController : ControllerBase
     {
-        private readonly IGameManager signRepository;
+        private readonly ISignManager signManager;
 
-        public SignApiController(IGameManager signRepository)
+        public SignApiController(ISignManager signManager)
         {
-            this.signRepository = signRepository;
+            this.signManager = signManager;
         }
 
         public GetSignsResponse GetSigns()
         {
-            Sign[] signs = this.signRepository.GetSigns();
+            Sign[] signs = this.signManager.GetSigns();
 
             GetSignsResponse response = new GetSignsResponse
             {

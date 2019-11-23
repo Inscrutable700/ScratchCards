@@ -11,17 +11,12 @@ namespace ScratchCards.Controllers
 {
     public class GameController : Controller
     {
-        private readonly IGameManager signRepository;
-
-        public GameController(IGameManager signRepository)
+        public GameController()
         {
-            this.signRepository = signRepository;
         }
 
         public IActionResult Index()
         {
-            Sign[] signs = this.signRepository.GetSigns();
-
             return View();
         }
     }

@@ -1,8 +1,4 @@
 ﻿using ScratchCards.Interfaces.Manager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ScratchCards.Managers
 {
@@ -10,7 +6,7 @@ namespace ScratchCards.Managers
     {
         public int[] Spin()
         {
-            throw new NotImplementedException();
+            return new int[] { 1, 2, 3};
         }
     }
 }
