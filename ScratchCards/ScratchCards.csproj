@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\services\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

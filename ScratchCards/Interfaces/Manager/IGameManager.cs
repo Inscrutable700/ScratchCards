@@ -8,6 +8,6 @@ namespace ScratchCards.Interfaces.Manager
 {
     public interface IGameManager
     {
-        int[] Spin();
+        int[] Spin(int gameId, int bet);
     }
 }

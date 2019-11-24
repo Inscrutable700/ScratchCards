@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ScratchCards.Extensions;
 using ScratchCards.Interfaces.Manager;
 using ScratchCards.Models.Api.Game;
 
@@ -15,17 +16,22 @@ namespace ScratchCards.Controllers.Api
             this.gameManager = gameManager;
         }
 
-        [HttpPost, Route("")]
-        public GameSpinResponse Spin()
+        [HttpPost, Route("{gameId:int}")]
+        public IActionResult Spin(int gameId, [FromForm] GameSpinRequest request)
         {
-            int[] signIds = this.gameManager.Spin();
+            if (request == null)
+            {
+                return this.BadRequest("Request data should be provided.");
+            }
+
+            int[] signIds = this.gameManager.Spin(gameId, request.Bet);
 
             GameSpinResponse response = new GameSpinResponse
             {
                 SignIds = signIds
             };
 
-            return response;
+            return this.Json(response);
         }
     }
 }

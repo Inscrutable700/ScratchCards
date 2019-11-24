@@ -1,4 +1,6 @@
-﻿var gameViewModel = {};
+﻿var gameViewModel = {
+    gameId: 1
+};
 
 (function(viewModel) {
     $("#spinBtn").click(() => {
@@ -9,11 +11,16 @@
     loadSigns();
 
     function spin() {
+        var request = {
+            bet: $("#bet").val()
+        }
+
         $.ajax({
             type: "POST",
-            url: "api/game",
+            url: "api/game/" + viewModel.gameId,
+            data: request,
+            dataType: 'json',
             beforeSend: function() {
-                //$("body").mask("Processing...");
             }
         }).done(function(r) {
             console.log(r);
