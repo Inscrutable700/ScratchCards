@@ -13,6 +13,8 @@ namespace ScratchCards
             services.AddTransient<ISignRepository, SignRepository>();
             services.AddTransient<IGameManager, GameManager>();
             services.AddTransient<ISignManager, SignManager>();
+            services.AddTransient<ICachingManager, CachingManager>();
+            services.AddTransient<IGameRepository, GameRepository>();
         }
     }
 }

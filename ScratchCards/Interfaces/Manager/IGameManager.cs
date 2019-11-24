@@ -1,4 +1,5 @@
-﻿using ScratchCards.Models;
+﻿using ScratchCards.Dto;
+using ScratchCards.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace ScratchCards.Interfaces.Manager
 {
     public interface IGameManager
     {
-        int[] Spin(int gameId, int bet);
+        GameSpinDto Spin(int gameId, int bet, int numberOfScratchCards);
+
+        GameConfigurationDto GetGameConfiguration(int gameId);
     }
 }

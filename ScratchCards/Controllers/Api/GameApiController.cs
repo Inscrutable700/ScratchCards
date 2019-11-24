@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ScratchCards.Dto;
 using ScratchCards.Extensions;
 using ScratchCards.Interfaces.Manager;
 using ScratchCards.Models.Api.Game;
+using System.Linq;
 
 namespace ScratchCards.Controllers.Api
 {
@@ -24,11 +26,17 @@ namespace ScratchCards.Controllers.Api
                 return this.BadRequest("Request data should be provided.");
             }
 
-            int[] signIds = this.gameManager.Spin(gameId, request.Bet);
+            GameSpinDto res = this.gameManager.Spin(gameId, request.Bet, request.NumberOfScratchCards);
 
             GameSpinResponse response = new GameSpinResponse
             {
-                SignIds = signIds
+                Prize = res.Prize,
+                WheelSignIds = res.WheelSignIds,
+                ScratchCards = res.ScratchCards.Select(sc => new GameSpinResponse.ScratchCard
+                {
+                    Prize = sc.Prize,
+                    SignIds = sc.SignIds
+                }).ToArray()
             };
 
             return this.Json(response);

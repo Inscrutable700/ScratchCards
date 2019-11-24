@@ -16,6 +16,8 @@ namespace ScratchCards.Data
 
         public DbSet<Sign> Signs { get; set; }
 
+        public DbSet<Game> Games { get; set; }
 
+        public DbSet<MatchingConfiguration> MatchingConfigurations { get; set; }
     }
 }

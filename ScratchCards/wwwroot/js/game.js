@@ -12,7 +12,8 @@
 
     function spin() {
         var request = {
-            bet: $("#bet").val()
+            bet: $("#bet").val(),
+            numberOfScratchCards: $("#number-of-scratch-cards").val()
         }
 
         $.ajax({
@@ -25,10 +26,27 @@
         }).done(function(r) {
             console.log(r);
 
-            $.each(r.signIds, (index, signId) => {
+            $("#wheel-selected").html('');
+            $.each(r.wheelSignIds, (index, signId) => {
                 var sign = getSignById(signId);
+                $("#wheel-selected").append("<span class='badge badge-primary'>" + sign.name + "</span>");
+            });
 
-                $("#scratch-card").append("<span class='badge badge-primary'>" + sign.name + "</span>");
+            $("#scratch-card").html('');
+            $.each(r.scratchCards, (index, scratchCard) => {
+                var scratchCardNumber = index + 1;
+
+                var $scratchCardDiv = $('<div>', {id: 'scratch-card-' + scratchCardNumber});
+
+                $scratchCardDiv.append('<span>Scratch Card #' + scratchCardNumber + ' (Prize = ' + scratchCard.prize + '): </span>')
+
+                $.each(scratchCard.signIds, (index2, signId) => {
+
+                    var sign = getSignById(signId);
+                    $scratchCardDiv.append("<span class='badge badge-primary'>" + sign.name + "</span>");
+                });
+
+                $("#scratch-card").append($scratchCardDiv);
             });
         });
     }
@@ -52,6 +70,6 @@
     }
 
     function getSignById(signId) {
-        return viewModel.signs.filter(s => s.id == signId);
+        return viewModel.signs.filter(s => s.id == signId)[0];
     }
 })(gameViewModel);

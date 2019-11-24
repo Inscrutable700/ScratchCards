@@ -1,25 +1,44 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Scratch Cards";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Game</h1>
+<h1>Scratch Cards game</h1>
 
-
+<h4>Wheel Signs</h4>
 <div id="wheel">
 
 </div>
 
+
+<br/>
+
+
 <div>
-    <input type="number" name="bet" id="bet" value="3" />
+	<span>Bet: </span>
+    <input type="number" name="bet" id="bet" value="3" min="1" />
+	<span>Number of Scratch Cards: </span>
+    <input type="number" name="number-of-scratch-cards" id="number-of-scratch-cards" value="1" min="1" />
 
     <input type="button" id="spinBtn" value="Spin" />
 </div>
 
+<br />
+
+<h4>Selected Wheel Signs</h4>
+
+<div id="wheel-selected">
+
+</div>
+<br />
+<h4>Scratch Cards</h4>
+
+
 <div id="scratch-card">
 
 </div>
+
 
 @section Scripts{
     <script src="~/js/game.js" asp-append-version="true"></script>
