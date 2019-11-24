@@ -15,6 +15,12 @@ namespace ScratchCards.Dto
 
         public int SignsNumberOnScratchCard { get; set; }
 
+        public int MaxNumberOfScratchCards { get; set; }
+
+        public bool ScratchCardSignsCanRepeat { get; set; }
+
+        public bool UseJokerFeature { get; set; }
+
         public SignDto[] Signs { get; set; }
 
         public MatchingConfigurationDto[] MatchingConfigurations { get; set; }

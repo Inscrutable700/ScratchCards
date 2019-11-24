@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ScratchCards.Models
 {
@@ -14,6 +12,12 @@ namespace ScratchCards.Models
         public int SignsNumberOnWheel { get; set; }
 
         public int SignsNumberOnScratchCard { get; set; }
+
+        public int MaxNumberOfScratchCards { get; set; }
+
+        public bool ScratchCardSignsCanRepeat { get; set; }
+
+        public bool UseJokerFeature { get; set; }
 
         public ICollection<Sign> Signs { get; set; }
 

@@ -226,14 +226,23 @@ namespace ScratchCards.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("MaxNumberOfScratchCards")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ScratchCardSignsCanRepeat")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SignsNumberOnScratchCard")
                         .HasColumnType("int");
 
                     b.Property<int>("SignsNumberOnWheel")
                         .HasColumnType("int");
+
+                    b.Property<bool>("UseJokerFeature")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -278,6 +287,9 @@ namespace ScratchCards.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Special")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

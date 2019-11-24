@@ -15,6 +15,8 @@ namespace ScratchCards.Models
 
         public string ImageUrl { get; set; }
 
+        public bool Special { get; set; }
+
         public int GameId { get; set; }
 
         public Game Game { get; set; }

@@ -8,7 +8,7 @@
         spin();
     });
 
-    loadSigns();
+    loadGameConfiguration();
 
     function spin() {
         var request = {
@@ -26,6 +26,8 @@
         }).done(function(r) {
             console.log(r);
 
+            $("#win").text(r.prize);
+
             $("#wheel-selected").html('');
             $.each(r.wheelSignIds, (index, signId) => {
                 var sign = getSignById(signId);
@@ -38,7 +40,7 @@
 
                 var $scratchCardDiv = $('<div>', {id: 'scratch-card-' + scratchCardNumber});
 
-                $scratchCardDiv.append('<span>Scratch Card #' + scratchCardNumber + ' (Prize = ' + scratchCard.prize + '): </span>')
+                $scratchCardDiv.append('<span>Scratch Card #' + scratchCardNumber + ' (Prize = bet * ' + scratchCard.factor + ' = ' + scratchCard.prize + '): </span>')
 
                 $.each(scratchCard.signIds, (index2, signId) => {
 
@@ -48,28 +50,31 @@
 
                 $("#scratch-card").append($scratchCardDiv);
             });
+        }).fail(function(r){
+            alert(r.responseText);
         });
     }
 
-    function loadSigns() {
+    function loadGameConfiguration() {
         $.ajax({
             type: "GET",
-            url: "api/sign",
+            url: "api/game/" + gameViewModel.gameId + "/config",
             beforeSend: function() {
-                //$("body").mask("Processing...");
             }
         }).done(function(r) {
             console.log(r);
 
-            viewModel.signs = r.signs;
+            viewModel.gameConfig = r;
+            
+            var wheelSigns = r.signs.filter(s => !s.special);
 
-            $.each(r.signs, (index, sign) => {
+            $.each(wheelSigns, (index, sign) => {
                 $("#wheel").append("<span class='badge badge-primary'>" + sign.name + "</span>");
             });
         });
     }
 
     function getSignById(signId) {
-        return viewModel.signs.filter(s => s.id == signId)[0];
+        return viewModel.gameConfig.signs.filter(s => s.id == signId)[0];
     }
 })(gameViewModel);

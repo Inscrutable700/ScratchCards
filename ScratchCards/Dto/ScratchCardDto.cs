@@ -10,5 +10,7 @@ namespace ScratchCards.Dto
         public int[] SignIds { get; set; }
 
         public int Prize { get; set; }
+
+        public int Factor { get; set; }
     }
 }
