@@ -10,8 +10,8 @@ using ScratchCards.Data;
 namespace ScratchCards.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191124141047_AddGameTable")]
-    partial class AddGameTable
+    [Migration("20191125143849_InitDbSchemeAndData")]
+    partial class InitDbSchemeAndData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,8 +228,14 @@ namespace ScratchCards.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("MaxNumberOfScratchCards")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ScratchCardSignsCanRepeat")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SignsNumberOnScratchCard")
                         .HasColumnType("int");
@@ -237,9 +243,77 @@ namespace ScratchCards.Data.Migrations
                     b.Property<int>("SignsNumberOnWheel")
                         .HasColumnType("int");
 
+                    b.Property<bool>("UseJokerFeature")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Game");
+                    b.ToTable("Games");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MaxNumberOfScratchCards = 4,
+                            Name = "ScratchCards",
+                            ScratchCardSignsCanRepeat = true,
+                            SignsNumberOnScratchCard = 4,
+                            SignsNumberOnWheel = 3,
+                            UseJokerFeature = true
+                        });
+                });
+
+            modelBuilder.Entity("ScratchCards.Models.MatchingConfiguration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Factor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MatchingSignsCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("MatchingConfigurations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Factor = 3,
+                            GameId = 1,
+                            MatchingSignsCount = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Factor = 5,
+                            GameId = 1,
+                            MatchingSignsCount = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Factor = 9,
+                            GameId = 1,
+                            MatchingSignsCount = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Factor = 13,
+                            GameId = 1,
+                            MatchingSignsCount = 4
+                        });
                 });
 
             modelBuilder.Entity("ScratchCards.Models.Sign", b =>
@@ -258,11 +332,107 @@ namespace ScratchCards.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Special")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GameId");
 
                     b.ToTable("Signs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GameId = 1,
+                            Name = "Sign 1",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GameId = 1,
+                            Name = "Sign 2",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GameId = 1,
+                            Name = "Sign 3",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            GameId = 1,
+                            Name = "Sign 4",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            GameId = 1,
+                            Name = "Sign 5",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            GameId = 1,
+                            Name = "Sign 6",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            GameId = 1,
+                            Name = "Sign 7",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            GameId = 1,
+                            Name = "Sign 8",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 9,
+                            GameId = 1,
+                            Name = "Sign 9",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            GameId = 1,
+                            Name = "Sign 10",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 11,
+                            GameId = 1,
+                            Name = "Sign 11",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 12,
+                            GameId = 1,
+                            Name = "Sign 12",
+                            Special = false
+                        },
+                        new
+                        {
+                            Id = 13,
+                            GameId = 1,
+                            Name = "Joker",
+                            Special = true
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -312,6 +482,15 @@ namespace ScratchCards.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ScratchCards.Models.MatchingConfiguration", b =>
+                {
+                    b.HasOne("ScratchCards.Models.Game", "Game")
+                        .WithMany("MatchingConfigurations")
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

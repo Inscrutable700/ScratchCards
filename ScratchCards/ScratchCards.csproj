@@ -5,6 +5,19 @@
     <UserSecretsId>aspnet-ScratchCards-9FFC655F-39D3-4A5E-B12B-31493AB01CC9</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20191121140729_AddSignTable.cs" />
+    <Compile Remove="Data\Migrations\20191121140729_AddSignTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191124141047_AddGameTable.cs" />
+    <Compile Remove="Data\Migrations\20191124141047_AddGameTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191124155359_Test.cs" />
+    <Compile Remove="Data\Migrations\20191124155359_Test.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191124160611_AddMatchingConfigurationTable.cs" />
+    <Compile Remove="Data\Migrations\20191124160611_AddMatchingConfigurationTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191124200917_Testt.cs" />
+    <Compile Remove="Data\Migrations\20191124200917_Testt.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
